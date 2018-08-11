@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SIC/XE Hex to Mneumonics</title>
+
+	<style type="text/css" media="screen">
+		#question {
+				color:red;
+				font-size:30px;
+				background-color: lightyellow;
+
+				
+		}
+		#BtnQues {
+			width: 200px;
+			height:60px;
+			margin-left: 800px;
+		}
+		#inputHex{
+			height: 100px;	
+			width: 10000px;
+		}	}
+		
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#question").toggle();
+		});
+		$(document).ready(function() {
+			$("#BtnQues").click(function(event) {
+				var q=$("#question");
+				q.toggle(500);
+				if($(this).text()=="Show the question"){
+					$(this).text("Hide the question");
+				}
+				else{
+					$(this).text("Show the question");
+				}
+				
+
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<p id="question">Design the algorithm of a program that can accept a six digit hexa decimal number as an instruction of SIC or SIC/XE machine  and detect whether it is a SIC or SIC/XE machine instruction or not , Nature of addressing used, Target address of the instruction and mnemonic code of the instruction.  (For calculating the TA you can initialize the values of various registers or accept it as input)</p>
+	<button type="show" id="BtnQues">Show the question</button>
+	<h1>Enter the hex code (Keep it below 4 digits):</h1>
+	form
+	<input type="text" name="InputHex" id="InputHex">
+
+</body>
+</html>
