@@ -19,28 +19,25 @@ string operation(string hex_a,string hex_b,int choice){ //0 for add and 1 for su
 	ss_sum<<hex<<sum;
 	return ss_sum.str();
 }	
-void decode(string bin,string str_X,string str_B,string str_PC){ //function to help decode the instruction
-	stringstream X,B,PC; //Register string streams
-	string addressing=""; //variable for addressing mode 
-	/*converting the string register addresses into hex and 
-	storing them into stringstream registers X,B,PC*/
-	X<<hex<<str_X; 
+void decode(string bin,string str_X,string str_B,string str_PC){
+	stringstream X,B,PC;
+	string addressing="";
+	X<<hex<<str_X;
 	B<<hex<<str_B;
 	PC<<hex<<str_PC;
-	stringstream TA; //variable for target address
-	string machine=""; //variable for SIC or SIC/XE machine
+	stringstream TA;
+	string machine="";
 	string opcode(bin.substr(0,6)); //first six bits is the opcode
-	stringstream ss_d; //variable for finding the displacement if exists
-	//finding the bit parameter values of n,i,b,x,n,p
-	char n=bin[6],i=bin[7],x=bin[8],b=bin[9],p=bin[10],e=bin[11];  
-	string mnemonic("");//Variable for storing the instruction format
+	stringstream ss_d;
+	char n=bin[6],i=bin[7],x=bin[8],b=bin[9],p=bin[10],e=bin[11];
+	string mnemonic("");
 
-	if(n=='0' && i=='0'){ //n=0 and i=0 means SIC machine
+	if(n=='0' && i=='0'){
 		mnemonic+="op m"; 
-		bitset<100> disp(bin.substr(9)); //finding the displacement by taking bits from 9 to rest
+		bitset<100> disp(bin.substr(9));
 		ss_d<<hex<<disp.to_ulong();	
 		machine="SIC";
-		if(x=='0'){ //This means index addressing exists
+		if(x=='1'){
 			mnemonic+=",X";  TA<<hex<<ss_d.str();  addressing="Direct";  
 		}
 		else{
@@ -49,9 +46,9 @@ void decode(string bin,string str_X,string str_B,string str_PC){ //function to h
 	}
 	else {
 		machine="SIC/XE";
-		if(e=='1') 		mnemonic+="+op "; //e=1 means its a format 4
-		else if(e=='0') mnemonic+="op "; //e=0 means its format 3
-		if(n=='1' && i=='1') addressing="direct"; //n stands for indirect i stands for immediate
+		if(e=='1') 		mnemonic+="+op ";
+		else if(e=='0') mnemonic+="op ";
+		if(n=='1' && i=='1') addressing="direct";
 		else if(n=='0' && i=='1'){
 			addressing="immediate"; 
 			mnemonic+="#";
@@ -98,21 +95,16 @@ void decode(string bin,string str_X,string str_B,string str_PC){ //function to h
 	cout<<"addressing mode: "<<addressing<<endl;
 	cout<<"mnemonic :"<<mnemonic<<endl;
 }
-int main(int argc,char *argv[]){ //pass the hex code as command line argument
-	if(argc==1){
-		cout<<"Enter a 6 digit Hex code"<<endl;
-	}
-	else{
-		string hex_input(argv[1]);
-		stringstream ss_hex;
-		ss_hex<<hex<<hex_input;
-		unsigned n;
-		ss_hex>>n;
-		int l=hex_input.length();
-		bitset<32> b(n);
-		string X,B,PC;
-		X="000090",B="006000";PC="003000";
-		cout<<"binary of "<<hex_input<<"is "<<b.to_string().substr((8-l)*4)<<endl;
-		decode(b.to_string().substr((8-l)*4),X,B,PC);	
-	}
+int main(){
+	string hex_input("f94fff");
+	stringstream ss_hex;
+	ss_hex<<hex<<hex_input;
+	unsigned n;
+	ss_hex>>n;
+	int l=hex_input.length();
+	bitset<32> b(n);
+	string X,B,PC;
+	X="000090",B="006000";PC="003000";
+	cout<<"binary of "<<hex_input<<"is "<<b.to_string().substr((8-l)*4)<<endl;
+	decode(b.to_string().substr((8-l)*4),X,B,PC);	
 }
