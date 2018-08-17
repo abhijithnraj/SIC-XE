@@ -1,0 +1,59 @@
+ADD m
+ADDF m
+ADDR r1,r2
+AND m
+CLEAR r1
+COMP m
+COMPF m
+COMPR r1,r2
+DIV m
+DIVF m
+DIVR r1,r2
+FIX
+FLOAT
+HLO
+J m
+JEQ m
+JGT m
+JLT m
+JSUB m
+LDA m
+LDB m
+LDCH m
+LDF m
+LDL m
+LDS m
+LDT m
+LDX m
+LDX m
+LPS m
+MUL m
+MULF m
+MULR r1,r2
+NORM
+OR m
+RD m
+RMO r1,r2
+RSUB
+SHIFTL r1,n
+SHIFTR r1,n
+SIO
+SSK m
+STA m
+STB m
+STCH m
++STI m
+STL m
+STS m
+STSW m
+STT m
+STX m
+SUB m
+SUBF m
+SUBR r1,r2
+SVC n
+TD m
+TIO
+TIX m
+TIXR r1
++wd m

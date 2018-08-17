@@ -1,0 +1,2 @@
+binary of 999999 is 100110011001100110011001
+Error in intstruction format (address length is not compatible)

@@ -8,8 +8,6 @@
 				color:red;
 				font-size:30px;
 				background-color: lightyellow;
-
-				
 		}
 		#BtnQues {
 			width: 200px;
@@ -24,6 +22,23 @@
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+		function decode(hex_value){
+			alert("trying for "+hex_value);
+			var answer_returned;
+			var xhhtp=new XMLHttpRequest();
+			alert("trying for "+hex_value);
+			xhhtp.onreadystatechange = function(){
+				alert("response "+this.responseText);
+				if(this.readyState == 4 && this.status==200){
+					answer_returned=this.responseText;
+					alert("response "+this.responseText);
+				}
+			};
+			//alert("trying for "+hex_value);
+			xhttp.open("GET","cgi.php?q="+hex_value,true);
+			return answer_returned;
+		}
+
 		$(document).ready(function() {
 			$("#question").toggle();
 		});
@@ -37,10 +52,21 @@
 				else{
 					$(this).text("Show the question");
 				}
-				
 
 			});
+			$("#hex_submit").click(function(event) {
+				var hex_box=$("#InputHex");
+				var hex_value=hex_box.val();
+				//$("h2").text(hex_value);
+				alert("about to decode");
+				var ans=decode(hex_value);
+				$("h2").text(ans);
+
+			});
+
 		});
+
+		
 
 	</script>
 </head>
@@ -48,8 +74,9 @@
 	<p id="question">Design the algorithm of a program that can accept a six digit hexa decimal number as an instruction of SIC or SIC/XE machine  and detect whether it is a SIC or SIC/XE machine instruction or not , Nature of addressing used, Target address of the instruction and mnemonic code of the instruction.  (For calculating the TA you can initialize the values of various registers or accept it as input)</p>
 	<button type="show" id="BtnQues">Show the question</button>
 	<h1>Enter the hex code (Keep it below 4 digits):</h1>
-	form
 	<input type="text" name="InputHex" id="InputHex">
-
+	<input type="submit" name="" id="hex_submit">
+	
+	<h2 id="answer">The answer is</h2>
 </body>
 </html>
