@@ -1,0 +1,6 @@
+#Ignore all files without an extention.
+!*.*
+
+#Ignore compiled binary file
+Decoder
+HextoBin
